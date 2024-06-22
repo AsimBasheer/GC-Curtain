@@ -10,11 +10,6 @@ const userSchema = new mongoose.Schema({
 });
 
 const productSchema = new mongoose.Schema({
-  productID: {
-    type: String,
-    default: uuid.v4,
-    unique: true,
-  },
   productCode: { type: String, required: true },
   barcode: { type: String },
   productName: { type: String, required: true },
@@ -37,7 +32,10 @@ const productSchema = new mongoose.Schema({
 
 // Stock schema
 const stockSchema = new mongoose.Schema({
-  product: { type: mongoose.Schema.Types.ObjectId, ref: "Product" },
+  product: {
+    type: Object,
+    // required: true,
+  },
   quantity: { type: Number, required: true },
   warehouse: { type: String },
   location: { type: String },
@@ -52,9 +50,12 @@ const orderSchema = new mongoose.Schema({
   buyerLocation: { type: String },
   orderLastDate: { type: Date },
   orderCreatedBy: { type: String },
-  createdBy: { type: String },
+  createdAt: { type: Date },
   price: { type: Number },
-  orderStatus: { type: String, enum: ["inStock", "outOfStock", "lowStock"] },
+  orderStatus: {
+    type: String,
+    enum: ["pending", "inProduction", "halt", "delivered"],
+  },
 });
 
 // In/Out schema

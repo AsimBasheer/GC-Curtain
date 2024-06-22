@@ -13,6 +13,13 @@ const {
   uploadImage,
 } = require("../controllers/products/products");
 
+const {
+  createStock,
+  getAllStock,
+  updateStock,
+  deleteStock,
+} = require("../controllers/stocks/stocks");
+
 router.post("/register", register);
 router.post("/login", login);
 router.get("/getUser", getUser);
@@ -25,7 +32,10 @@ router.delete("/deleteProduct/:id", deleteProduct);
 
 router.post("/uploadImage", uploadImage);
 
-// router.put('/products/:id', productController.updateProduct);
-// router.delete('/products/:id', productController.deleteProduct);
+// Stock Crud
+router.post("/createStock", createStock);
+router.get("/getAllStock", getAllStock);
+router.put("/updateStock/:id", updateStock);
+router.delete("/deleteStock/:id", deleteStock);
 
 module.exports = router;
